@@ -16,4 +16,9 @@ public class InterviewerService {
 	public List<Interviewer> insertInBatch(List<Interviewer> list) {
 		return interviewerRespository.saveAll(list);
 	}
+
+	public boolean findById(Integer id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
