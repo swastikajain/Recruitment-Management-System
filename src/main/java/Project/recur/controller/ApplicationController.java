@@ -1,11 +1,15 @@
-/*package Project.recur.controller;
+
+package Project.recur.controller;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import Project.recur.model.Application;
+import Project.recur.model.JobSeeker;
 import Project.recur.service.ApplicationService;
 
 
@@ -18,10 +22,15 @@ public class ApplicationController {
 	public Application insert(@RequestBody Application application) {
 		return applicationService.insert(application);
 	}
-}*/
-package Project.recur.controller;
+	@GetMapping("/application/all")
+	public List<Application> getAllApplication() {
+		List<Application> list = applicationService.getAllApplication();
+		return list;
+	}
+}
 
-import org.springframework.beans.factory.annotation.Autowired;
+
+/*import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,6 +59,6 @@ public class ApplicationController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-}
+}*/
 
 

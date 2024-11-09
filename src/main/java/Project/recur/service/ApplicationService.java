@@ -1,4 +1,6 @@
-/*package Project.recur.service;
+package Project.recur.service;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +19,13 @@ public class ApplicationService {
 		return applicationRepository.save(application);
 	}
 
-}*/
-package Project.recur.service;
+	public List<Application> getAllApplication() {
+		// TODO Auto-generated method stub
+		return applicationRepository.findAll();
+	}
+
+}
+/*package Project.recur.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,4 +69,4 @@ public class ApplicationService {
         return applicationRepository.save(application);
     }
 
-}
+}*/
