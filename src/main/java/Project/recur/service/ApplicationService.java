@@ -1,12 +1,17 @@
 package Project.recur.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import Project.recur.exception.ResourceNotFoundException;
 import Project.recur.model.Application;
+import Project.recur.model.Job;
 import Project.recur.repository.ApplicationRepository;
+import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -22,6 +27,22 @@ public class ApplicationService {
 	public List<Application> getAllApplication() {
 		// TODO Auto-generated method stub
 		return applicationRepository.findAll();
+	}
+
+	public void delete(int id) {
+		applicationRepository.deleteById(id);
+		
+	}
+
+	public Application validate(int id) throws ResourceNotFoundException{
+		Optional<Application> optional = applicationRepository.findById(id);
+		if(optional.isEmpty())
+			throw new ResourceNotFoundException("application id invalid");
+		
+		Application application = optional.get();
+		return application;
+		
+		
 	}
 
 }

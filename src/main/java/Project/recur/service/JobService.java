@@ -28,7 +28,7 @@ public class JobService {
 	public Job validate(int id) throws ResourceNotFoundException {
 		Optional<Job> optional = jobRepository.findById(id);
 		if(optional.isEmpty())
-			throw new ResourceNotFoundException("policy id invalid");
+			throw new ResourceNotFoundException("Job id invalid");
 		
 		Job job = optional.get();
 		return job; 
