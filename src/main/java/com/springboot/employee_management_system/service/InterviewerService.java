@@ -1,10 +1,10 @@
 package com.springboot.employee_management_system.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.springboot.employee_management_system.model.Interviewer;
 import com.springboot.employee_management_system.repository.InterviewerRepository;
 
@@ -17,8 +17,10 @@ public class InterviewerService {
 		return interviewerRespository.saveAll(list);
 	}
 
-	public boolean findById(Integer id) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean validate(Integer id) {
+		Optional<Interviewer> optional = interviewerRespository.findById(id);
+		if (optional.isEmpty())
+			return false;
+		return true;
 	}
 }

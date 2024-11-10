@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.employee_management_system.model.InterviewSchedular;
@@ -15,6 +16,7 @@ import com.springboot.employee_management_system.service.InterviewSchedularServi
 import com.springboot.employee_management_system.service.InterviewerService;
 
 @RestController
+@RequestMapping("/interviewer")
 public class InterviewerController {
 	@Autowired
 	private InterviewerService interviewerService;
@@ -26,17 +28,15 @@ public class InterviewerController {
 		return interviewerService.insertInBatch(list);
 	}
 
-	@PostMapping("/interviewer/scheduleinterview")
+	@PostMapping("/scheduleinterview")
 	public ResponseEntity<?> scheduleInterview(@RequestBody List<InterviewSchedular> list) {
 		try {
-			Integer id = null;
 			for (InterviewSchedular schedular : list) {
-				Interviewer interviewer = new Interviewer();
-				id = interviewer.getId();
-			}
-			// ID validation
-			if (id == null || !interviewerService.findById(id)) {
-				return ResponseEntity.badRequest().body("Invalid ID: " + id);
+				Interviewer interviewer = schedular.getInterviewer();
+				// ID validation
+				if (interviewer == null || !interviewerService.validate(interviewer.getId())) {
+					return ResponseEntity.badRequest().body("Invalid ID: " + interviewer.getId());
+				}
 			}
 
 			interviewSchedularService.insertInBatch(list);
