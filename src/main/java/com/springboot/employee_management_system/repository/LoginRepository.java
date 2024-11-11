@@ -8,5 +8,5 @@ import com.springboot.employee_management_system.model.Login;
 
 public interface LoginRepository extends JpaRepository<Login, Integer> {
 
-	Optional<Login> findByLoginId(int loginId);
+	Optional<Login> findByUsername(String username);
 }

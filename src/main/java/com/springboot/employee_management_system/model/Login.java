@@ -12,7 +12,10 @@ public class Login {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int loginId;
-
+	
+	@Column (nullable = false)
+	private String username;
+	
 	@Column(nullable = false)
 	private String password;
 
@@ -20,9 +23,17 @@ public class Login {
 	private String role;
 
 	// Getters and Setters
-
+	
 	public String getPassword() {
 		return password;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public int getLoginId() {

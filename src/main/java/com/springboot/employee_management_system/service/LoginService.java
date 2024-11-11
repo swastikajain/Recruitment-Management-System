@@ -24,9 +24,9 @@ public class LoginService {
 	}
 
 	public Login signup(Login login) throws InvalidUsernameException {
-		Optional<Login> optional = loginRepository.findByLoginId(login.getLoginId());
+		Optional<Login> optional = loginRepository.findByUsername(login.getUsername());
 		if (optional.isPresent()) {
-			throw new InvalidUsernameException("Login Id already exists");
+			throw new InvalidUsernameException("username already exists");
 		}
 
 		// password encryption
@@ -36,7 +36,7 @@ public class LoginService {
 		return loginRepository.save(login);
 	}
 
-	public Login findByUsername(int login_Id) {
-		return loginRepository.findByLoginId(login_Id).get();
+	public Login findByUsername(String username) {
+		return loginRepository.findByUsername(username).get();
 	}
 }
