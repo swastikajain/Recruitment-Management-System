@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import Project.recur.exception.ResourceNotFoundException;
+import Project.recur.model.Job;
 import Project.recur.model.JobSeeker;
 import Project.recur.repository.JobSeekerRepository;
 @Service
@@ -33,6 +34,10 @@ public class JobSeekerService {
 		JobSeeker jobSeeker = optional.get();
 		return jobSeeker; 
 		
+	}
+	public List<JobSeeker> insertInBatch(List<JobSeeker> list) {
+		// TODO Auto-generated method stub
+		return jobSeekerRepository.saveAll(list);
 	}
 
 }
