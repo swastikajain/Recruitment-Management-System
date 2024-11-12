@@ -16,8 +16,15 @@ public class InterviewSchedularController {
 	@Autowired
 	private InterviewSchedularService interviewSchedularService;
 
+	@PostMapping("/InterviewSchedular/add")
+	public InterviewSchedular ScheduleInterview(@RequestBody InterviewSchedular interviewSchedular) {
+		// System.out.println(policy);
+		return interviewSchedularService.insert(interviewSchedular);
+	}
+
 	@PostMapping("/InterviewSchedular/batch/addInterviewSchedule")
 	public List<InterviewSchedular> addInterviewScheduleBatch(@RequestBody List<InterviewSchedular> list) {
 		return interviewSchedularService.insertInBatch(list);
 	}
+
 }

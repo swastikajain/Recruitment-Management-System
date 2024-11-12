@@ -5,11 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springboot.employee_management_system.dto.ResponseMessageDto;
+import com.springboot.employee_management_system.exception.ResourceNotFoundException;
 import com.springboot.employee_management_system.model.InterviewSchedular;
 import com.springboot.employee_management_system.model.Interviewer;
 import com.springboot.employee_management_system.service.InterviewSchedularService;
@@ -23,7 +27,7 @@ public class InterviewerController {
 	@Autowired
 	private InterviewSchedularService interviewSchedularService;
 
-	@PostMapping("/interviewer/batch/addInterviewer")
+	@PostMapping("/batch/addInterviewer")
 	public List<Interviewer> addInterviewerBatch(@RequestBody List<Interviewer> list) {
 		return interviewerService.insertInBatch(list);
 	}
@@ -47,5 +51,37 @@ public class InterviewerController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("Error scheduling interview: " + e.getMessage());
 		}
+
 	}
+
+	@PutMapping("/update/{id}")
+	public ResponseEntity<?> updateInterview(@PathVariable int id, @RequestBody InterviewSchedular newInterview,
+			ResponseMessageDto dto) {
+		try {
+			InterviewSchedular existindInterview = interviewSchedularService.validate(id);
+			if (newInterview.getInterviewDate() != null)
+				existindInterview.setInterviewDate(newInterview.getInterviewDate());
+			if (newInterview.getInterviewTime() != null)
+				existindInterview.setInterviewTime(newInterview.getInterviewTime());
+			if (newInterview.getInterviewMode() != null)
+				existindInterview.setInterviewMode(newInterview.getInterviewMode());
+			if (newInterview.getInterviewStatus() != null)
+				existindInterview.setInterviewStatus(newInterview.getInterviewStatus());
+			if (newInterview.getInterviewType() != null)
+				existindInterview.setInterviewType(newInterview.getInterviewType());
+			if (newInterview.getLastUpdated() != null)
+				existindInterview.setLastUpdated(newInterview.getLastUpdated());
+			if (newInterview.getInterviewer() != null)
+				existindInterview.setInterviewer(newInterview.getInterviewer());
+
+			existindInterview = interviewSchedularService.insert(existindInterview);
+
+			return ResponseEntity.ok(existindInterview);
+		} catch (ResourceNotFoundException e) {
+			dto.setMsg(e.getMessage());
+
+			return ResponseEntity.badRequest().body(dto);
+		}
+	}
+
 }

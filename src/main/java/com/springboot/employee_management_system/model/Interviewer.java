@@ -35,7 +35,7 @@ public class Interviewer {
 	private String position;
 
 	@OneToOne
-	@JoinColumn(name = "Login_id", nullable = false)
+	@JoinColumn(name = "loginId", nullable = false)
 	private Login login;
 
 	@OneToMany(mappedBy = "interviewer")
