@@ -19,7 +19,7 @@ public class Hr {
 	private String name;
 
 	@OneToOne
-	@JoinColumn(name = "Login_id", nullable = false)
+	@JoinColumn(name = "login_id", nullable = false)
 	private Login login;
 
 	public int getId() {

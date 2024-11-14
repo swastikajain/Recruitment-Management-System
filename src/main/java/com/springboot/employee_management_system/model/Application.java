@@ -19,7 +19,7 @@ public class Application {
 	private String coverLetter;
 
 	@ManyToOne
-	@JoinColumn(name = "Job_idJob", nullable = false)
+	@JoinColumn(name = "Job_id", nullable = false)
 	private Job job;
 
 	@ManyToOne
@@ -27,7 +27,7 @@ public class Application {
 	private JobSeeker jobSeeker;
 
 	@ManyToOne
-	@JoinColumn(name = "Interview_id", nullable = false)
+	@JoinColumn(name = "interview_id")
 	private InterviewSchedular interviewSchedular;
 
 	public int getId() {

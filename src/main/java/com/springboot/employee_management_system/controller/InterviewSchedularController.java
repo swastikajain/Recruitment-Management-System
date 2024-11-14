@@ -3,6 +3,7 @@ package com.springboot.employee_management_system.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +26,12 @@ public class InterviewSchedularController {
 	@PostMapping("/InterviewSchedular/batch/addInterviewSchedule")
 	public List<InterviewSchedular> addInterviewScheduleBatch(@RequestBody List<InterviewSchedular> list) {
 		return interviewSchedularService.insertInBatch(list);
+	}
+
+	@GetMapping("/interviewschedular/all")
+	public List<InterviewSchedular> getAllInterviews() {
+		List<InterviewSchedular> interviews = interviewSchedularService.getAllInterview();
+		return interviews;
 	}
 
 }

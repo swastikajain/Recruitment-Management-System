@@ -23,4 +23,8 @@ public class InterviewerService {
 			return false;
 		return true;
 	}
+
+	public List<Interviewer> getAllInterviewer() {
+		return interviewerRespository.findAll();
+	}
 }

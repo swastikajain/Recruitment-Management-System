@@ -3,6 +3,7 @@ package com.springboot.employee_management_system.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,5 +20,11 @@ public class HrController {
 	@PostMapping("/hr/batch/addhr")
 	public List<Hr> addHrBatch(@RequestBody List<Hr> list) {
 		return hrService.insertInBatch(list);
+	}
+
+	@GetMapping("/hr/all")
+	public List<Hr> getAllHr() {
+		List<Hr> hr = hrService.getAllHr();
+		return hr;
 	}
 }

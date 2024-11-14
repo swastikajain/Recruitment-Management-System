@@ -5,11 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.employee_management_system.dto.ResponseMessageDto;
@@ -20,7 +21,6 @@ import com.springboot.employee_management_system.service.InterviewSchedularServi
 import com.springboot.employee_management_system.service.InterviewerService;
 
 @RestController
-@RequestMapping("/interviewer")
 public class InterviewerController {
 	@Autowired
 	private InterviewerService interviewerService;
@@ -82,6 +82,17 @@ public class InterviewerController {
 
 			return ResponseEntity.badRequest().body(dto);
 		}
+	}
+
+	@GetMapping("/interviewers/scheduled")
+	public List<Interviewer> getInterviewersByScheduleDate(@RequestParam String date) {
+		return interviewSchedularService.getInterviewersByScheduleDate(date);
+	}
+
+	@GetMapping("/interviewers/all")
+	public List<Interviewer> getAllInterviewer() {
+		List<Interviewer> interviewer = interviewerService.getAllInterviewer();
+		return interviewer;
 	}
 
 }

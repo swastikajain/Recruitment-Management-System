@@ -16,4 +16,8 @@ public class HrService {
 	public List<Hr> insertInBatch(List<Hr> list) {
 		return hrRepository.saveAll(list);
 	}
+
+	public List<Hr> getAllHr() {
+		return hrRepository.findAll();
+	}
 }

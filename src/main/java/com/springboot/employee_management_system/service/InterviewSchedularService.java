@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.springboot.employee_management_system.exception.ResourceNotFoundException;
 import com.springboot.employee_management_system.model.InterviewSchedular;
+import com.springboot.employee_management_system.model.Interviewer;
 import com.springboot.employee_management_system.repository.InterviewSchedularRepository;
 
 @Service
@@ -30,5 +31,13 @@ public class InterviewSchedularService {
 
 	public InterviewSchedular insert(InterviewSchedular interviewSchedular) {
 		return interviewSchedularRepository.save(interviewSchedular);
+	}
+
+	public List<Interviewer> getInterviewersByScheduleDate(String date) {
+		return interviewSchedularRepository.findInterviewersByScheduleDate(date);
+	}
+
+	public List<InterviewSchedular> getAllInterview() {
+		return interviewSchedularRepository.findAll();
 	}
 }

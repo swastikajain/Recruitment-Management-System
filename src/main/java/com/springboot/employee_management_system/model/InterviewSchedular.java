@@ -1,5 +1,7 @@
 package com.springboot.employee_management_system.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,6 +37,7 @@ public class InterviewSchedular {
 
 	@ManyToOne
 	@JoinColumn(name = "Interviewer_id", nullable = false)
+	@JsonBackReference
 	private Interviewer interviewer;
 
 	public int getInterviewId() {
